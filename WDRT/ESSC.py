@@ -303,7 +303,8 @@ class EA:
             pca46022 = ESSC.PCA(buoy46022)
             
             T_vals = np.arange(0.1, np.amax(buoy46022.T), 0.1)
-            SteepMax = 0.07  # Enter estimate of breaking steepness
+            # Enter estimate of breaking steepness
+            SteepMax = 0.07  # Reference DNV-RP-C205
             
             # Declare required parameters
             depth = 391.4  # Depth at measurement point (m)
@@ -2688,12 +2689,12 @@ class BivariateKDE(EA):
         self.Hs_ReturnContours = []
         self.T_ReturnContours = []
         for i,seg in enumerate(vals.allsegs[0]):
-            self.Hs_ReturnContours.append(seg[:,1])
+            self.Hs_ReturnContours.append(seg[:,1][:])
             self.T_ReturnContours.append(seg[:,0])
-        
-        # self.Hs_ReturnContours = np.transpose(np.asarray(self.Hs_ReturnContours)[0])
-        # self.T_ReturnContours = np.transpose(np.asarray(self.T_ReturnContours)[0])
-            
+
+#        self.Hs_ReturnContours = np.transpose(np.asarray(self.Hs_ReturnContours)[0])
+#        self.T_ReturnContours = np.transpose(np.asarray(self.T_ReturnContours)[0])
+#        self.vals = vals    
 #        contourVals = np.empty((0,2))
 #        for seg in vals.allsegs[0]:
 #            contourVals = np.append(contourVals,seg, axis = 0)
