@@ -816,9 +816,9 @@ class EA:
         phi_std = np.column_stack((np.ones(num+1),hss[:],hss[:]**2))
 
         # Estimate coefficients of mean of Ln(T|Hs)(vector 4x1) (cubic in Hs)
-        mean_cond = np.linalg.lstsq(phi_mean,para_dist_cond[:,0])[0]
+        mean_cond = np.linalg.lstsq(phi_mean,para_dist_cond[:,0],rcond=-1)[0]#Added rcond=-1 6/24/20 to avoid deprecation
         # Estimate coefficients of standard deviation of Ln(T|Hs) (vector 3x1) (quadratic in Hs)
-        std_cond = np.linalg.lstsq(phi_std,para_dist_cond[:,1])[0]
+        std_cond = np.linalg.lstsq(phi_std,para_dist_cond[:,1],rcond=-1)[0] #Added rcond=-1 6/24/20 to avoid deprecation
 
         return para_dist_1, para_dist_2, mean_cond, std_cond
         
